@@ -2,20 +2,25 @@
 
 namespace Lab7Collections
 {
-    enum Genre
+    public enum Genre
     {
         Fantasy,
         Western,
         Romance,
         Thriller,
-        Mystery
+        Mystery,
+        Self,
+        Fiction,
+        Biography
     }
 
     class Program
     {
-  
+        public static Library<Book> Library = new Library<Book>();
+        public static List<Book> BookBag = new Library<Book>();
         static void Main(string[] args)
         {
+            loadBooks();
             bool displayMenu = true;
             while(displayMenu)
             {
@@ -36,38 +41,27 @@ namespace Lab7Collections
 
             if (userResponse == "1")
             {
-                Console.Clear();
-                Console.WriteLine("1");
-                Console.ReadLine();
-                    return true;
+                ViewAllBooks();
+                return true;
             }
             else if (userResponse == "2")
             {
-                Console.Clear();
-                Console.WriteLine("2");
-                Console.ReadLine();
                 AddABook();
                 return true;
             }
             else if (userResponse == "3")
             {
-                Console.Clear();
-                Console.WriteLine("3");
-                Console.ReadLine();
+                borrowAbook();
                 return true;
             }
             else if (userResponse == "4")
             {
-                Console.Clear();
-                Console.WriteLine("4");
-                Console.ReadLine();
+                returnAbook();
                 return true;
             }
             else if (userResponse == "5")
             {
-                Console.Clear();
-                Console.WriteLine("5");
-                Console.ReadLine();
+                viewBookbag();
                 return true;
             }
             else
@@ -78,6 +72,18 @@ namespace Lab7Collections
             }
 
         }
+
+
+        public static void loadBooks()
+        {
+            Book Contagious = new Book("Contagious:Why things catch on", new Author("Jonah", "Berger"), Genre.Self,256);
+            Book Power = new Book("48 Laws of Power", new Author("Robert", "Greene"), Genre.Self,452);
+            Book Between = new Book("Between the World and Me", new Author("Ta-Nehisi", "Coates"), Genre.Biography,176);
+            Book Outliers = new Book("Outliers", new Author("Malcolm", "Gladwell"), Genre.Self,304);
+            Book Agreements = new Book("The Four Agreements", new Author("Don Miguel", "Ruiz"), Genre.Self,160);
+        }
+
+
 
 
 
@@ -96,6 +102,25 @@ namespace Lab7Collections
             };
 
             Library.Add(book);
+        }
+
+        static void ReturnBook()
+        {
+            Dictionary<int, Book> books = new Dictionary<int, Book>();
+            Console.WriteLine("Which book would you like to return");
+            int counter = 1;
+            foreach (var item in BookBag)
+            {
+                books.Add(counter, item);
+                Console.WriteLine($"{counter++}. {item.Title} - {item.Author.FirstName} {item.Author.LastName}");
+
+            }
+
+            string response = Console.ReadLine();
+            int.TryParse(response, out int selection);
+            books.TryGetValue(selection, out Book returnedBook);
+            BookBag.Remove(returnedBook);
+            Library.Add(returnedBook);
         }
 
 
