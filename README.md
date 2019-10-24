@@ -11,12 +11,12 @@ view a book, return a book, and borrow a book.
 
 
 ## Methods being used:  
-ViewAllBooks();
-AddABook();
-borrowAbook();
-returnAbook();
-viewBookbag();
-loadBooks();
+ViewAllBooks();  
+AddABook();  
+borrowAbook();  
+returnAbook();  
+viewBookbag();  
+loadBooks();  
 
  ## Classes being used:  
  Author class 
