@@ -19,9 +19,9 @@ viewBookbag();
 loadBooks();  
 
  ## Classes being used:  
- Author class 
+ Author class  
  Book class  
- Library class  
+ Library class    
 
 ---
 
