@@ -1,32 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Lab7Collections
 {
-    public enum Genre
-    {
-        Fantasy,
-        Western,
-        Romance,
-        Thriller,
-        Mystery,
-        Self,
-        Fiction,
-        Biography
-    }
 
-    class Program
+
+    public class Program
     {
-        public static Library<Book> Library = new Library<Book>();
-        public static List<Book> BookBag = new Library<Book>();
         static void Main(string[] args)
         {
             loadBooks();
             bool displayMenu = true;
-            while(displayMenu)
+            while (displayMenu)
             {
                 displayMenu = UserInterface();
             }
         }
+        public static Library<Book> Library = new Library<Book>();
+        public static List<Book> BookBag = new List<Book>();
+        public static Genre bookGenre = new Genre();
         public static bool UserInterface()
         {
             Console.WriteLine("Welcome to my library");
@@ -46,7 +38,34 @@ namespace Lab7Collections
             }
             else if (userResponse == "2")
             {
-                AddABook();
+                Console.Clear();
+                Console.WriteLine("Please enter your book's information");
+                Console.WriteLine("What is the title of your book?");
+                string title = Console.ReadLine();
+                Console.WriteLine("Please enter the author's first name: ");
+                string firstName = Console.ReadLine();
+                Console.WriteLine("Please enter the author's last name: ");
+                string lastName = Console.ReadLine();
+                Console.WriteLine("Please select the book's genre: ");
+                Console.WriteLine("0) Fantasy");
+                Console.WriteLine("1) Western");
+                Console.WriteLine("2) Romance");
+                Console.WriteLine("3) Thriller");
+                Console.WriteLine("4) Mystery");
+                Console.WriteLine("5) Self");
+                Console.WriteLine("6) Fiction");
+                Console.WriteLine("7) Biography");
+                string genre = Console.ReadLine();
+                Console.WriteLine("Please enter the number of pages in this book: ");
+                string numberOfpages = Console.ReadLine();
+                Console.WriteLine($"{title} has successfully been added. Please press 'Enter' to return to the main menu.");
+                string userAnswer = Console.ReadLine();
+                if (userAnswer == "1")
+                {
+                    UserInterface();
+                }
+
+                AddABook(title,firstName, lastName, (Genre)Convert.ToInt32(genre), Convert.ToInt32(numberOfpages));
                 return true;
             }
             else if (userResponse == "3")
@@ -65,7 +84,7 @@ namespace Lab7Collections
                 return true;
             }
             else
-             {
+            {
                 Console.WriteLine("6");
                 Console.ReadLine();
                 return false;
@@ -76,35 +95,39 @@ namespace Lab7Collections
 
         public static void loadBooks()
         {
-            Book Contagious = new Book("Contagious:Why things catch on", new Author("Jonah", "Berger"), Genre.Self,256);
-            Book Power = new Book("48 Laws of Power", new Author("Robert", "Greene"), Genre.Self,452);
-            Book Between = new Book("Between the World and Me", new Author("Ta-Nehisi", "Coates"), Genre.Biography,176);
-            Book Outliers = new Book("Outliers", new Author("Malcolm", "Gladwell"), Genre.Self,304);
-            Book Agreements = new Book("The Four Agreements", new Author("Don Miguel", "Ruiz"), Genre.Self,160);
+            Book Contagious = new Book("Contagious: Why things catch on", new Author("Jonah", "Berger"), Genre.Self, 256);
+            Book Power = new Book("48 Laws of Power", new Author("Robert", "Greene"), Genre.Self, 452);
+            Book Between = new Book("Between the World and Me", new Author("Ta-Nehisi", "Coates"), Genre.Biography, 176);
+            Book Outliers = new Book("Outliers", new Author("Malcolm", "Gladwell"), Genre.Self, 304);
+            Book Agreements = new Book("The Four Agreements", new Author("Author: Don Miguel", "Ruiz"), Genre.Self, 160);
+            Book[] loadedBooks = new Book[] { Contagious, Power, Between, Outliers, Agreements };
+            foreach (Book book in loadedBooks)
+            {
+                Library.Add(book);
+            }
+        }
+
+        public static void ViewAllBooks()
+        {
+            Console.Clear();
+            Console.WriteLine("All Books:\n");
+            foreach (Book book in Library)
+            {
+                Console.WriteLine($"Title: {book.Title}\nAuthor: {book.Author.FirstName} {book.Author.LastName}\nGenre: {book.Genre}\nNumber of pages: {book.NumberOfPages}\n\n");
+            }
+
         }
 
 
-
-
-
-        static void AddABook(string title, string firstName, string lastName, int numberOfPages, Genre genre)
+        public static void AddABook(string title, string firstName, string lastName, Genre genre, int numberOfPages)
         {
-            Book book = new Book()
-            {
-                Title = title,
-                Author = new Author()
-                {
-                    FirstName = firstName,
-                    LastName = lastName
-                },
-                NumberOfPages = numberOfPages,
-                Genre = genre
-            };
-
+            Author author = new Author(firstName, lastName);
+            Book book = new Book(title, author, genre, numberOfPages);
             Library.Add(book);
         }
 
-        static void ReturnBook()
+
+        static void returnAbook()
         {
             Dictionary<int, Book> books = new Dictionary<int, Book>();
             Console.WriteLine("Which book would you like to return");
@@ -123,13 +146,44 @@ namespace Lab7Collections
             Library.Add(returnedBook);
         }
 
+        public static void borrowAbook()
+        {
+            Dictionary<int, Book> books = new Dictionary<int, Book>();
+            Console.WriteLine("Which book would you like to borrow");
+            int counter = 1;
+            foreach (var item in Library)
+            {
+                books.Add(counter, item);
+                Console.WriteLine($"{counter++}. {item.Title} - {item.Author.FirstName} {item.Author.LastName}");
+
+            }
+
+            string response = Console.ReadLine();
+            int.TryParse(response, out int selection);
+            books.TryGetValue(selection, out Book bookBorrowed);
+            Library.Remove(bookBorrowed);
+            BookBag.Add(bookBorrowed);
+        }
 
 
-
-
-
-
-
+        public static void viewBookbag()
+        {
+            int counter = 1;
+            foreach (var item in BookBag)
+            {
+                Console.WriteLine($"{counter++}. {item.Title} - {item.Author.FirstName} {item.Author.LastName}");
+            }
+        }
 
     }
+
+
+
+
+
+
+
+
+
 }
+

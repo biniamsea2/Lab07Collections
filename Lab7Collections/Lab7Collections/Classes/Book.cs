@@ -4,6 +4,17 @@ using System.Text;
 
 namespace Lab7Collections
 {
+    public enum Genre
+    {
+        Fantasy,
+        Western,
+        Romance,
+        Thriller,
+        Mystery,
+        Self,
+        Fiction,
+        Biography,
+    }
     public class Book
     {
         public string Title { get; set; }
@@ -18,5 +29,7 @@ namespace Lab7Collections
             Genre = genre;
             NumberOfPages = numberOfPages;
         }
+
+    
     }
 }

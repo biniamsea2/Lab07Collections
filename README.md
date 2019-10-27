@@ -52,6 +52,8 @@ Then select and open ```# Lab07Collections.sln```
 
 ### Change Log
 1.0: LAB 07: Collections partial 10/23/19  
+1.1: LAB 07: Collections complete 10/26/19  
+
 
 
 ------------------------------
