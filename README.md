@@ -46,7 +46,8 @@ Then select and open ```# Lab07Collections.sln```
 ### Visuals
 
 #### Application Diagram
-![Image 1]().png)
+Application Start
+![Image 1](https://github.com/biniamsea2/Lab07Collections/blob/master/Screenshots/Screenshot%20(42).png)
 
 ---
 
