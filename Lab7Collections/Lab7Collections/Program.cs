@@ -177,13 +177,5 @@ namespace Lab7Collections
 
     }
 
-
-
-
-
-
-
-
-
 }
 
