@@ -48,6 +48,17 @@ Then select and open ```# Lab07Collections.sln```
 #### Application Diagram
 Application Start
 ![Image 1](https://github.com/biniamsea2/Lab07Collections/blob/master/Screenshots/Screenshot%20(42).png)
+Viewing All Books
+![Image 1](https://github.com/biniamsea2/Lab07Collections/blob/master/Screenshots/Screenshot%20(43).png)
+Adding Book
+![Image 1](https://github.com/biniamsea2/Lab07Collections/blob/master/Screenshots/Screenshot%20(45).png)
+Book Added
+![Image 1](https://github.com/biniamsea2/Lab07Collections/blob/master/Screenshots/Screenshot%20(46).png)
+Borrowing a Book
+![Image 1](https://github.com/biniamsea2/Lab07Collections/blob/master/Screenshots/Screenshot%20(47).png)
+Returning a Book
+![Image 1](https://github.com/biniamsea2/Lab07Collections/blob/master/Screenshots/Screenshot%20(48).png)
+
 
 ---
 
